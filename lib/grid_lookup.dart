@@ -236,6 +236,6 @@ class GridLookupDataSorce<T> extends DataGridSource {
   }
 }
 
-abstract class GridLookupClas {
+abstract class GridLookupClass {
   Map<String, dynamic> toMap();
 }
