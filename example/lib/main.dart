@@ -19,6 +19,8 @@ class _MyAppState extends State<MyApp> {
       Product('Laptop', 999.99, 20),
       Product('Phone', 499.99, 50),
       Product('Tablet', 299.99, 30),
+      Product('Car', 3000.99, 30),
+      Product('Bike', 500.99, 30),
     ];
     List<Map<String, dynamic>> productData =
         products.map((p) => p.toMap()).toList();
@@ -40,11 +42,16 @@ class _MyAppState extends State<MyApp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GridLookup<Map<String, dynamic>>(
+                    inputDecoration: InputDecoration(
+                      fillColor: Colors.green,
+                      border: OutlineInputBorder(),
+                    ),
                     dataSource: dataSource,
-                    inputHeight: 50,
-                    buttonSize: 50,
-                    inputWidth: 300,
-                    tableHeight: 200,
+                    inputHeight: 40,
+                    buttonSize: 40,
+                    inputWidth: 400,
+                    tableHeight: 300,
+                    selectColumnIndex: 1,
                     onSelectedMenu: (selectedValue) {
                       print('Selected: $selectedValue');
                     },

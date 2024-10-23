@@ -1,6 +1,6 @@
 name: grid_lookup
 description: "A Flutter package providing a dynamic and flexible grid lookup widget for efficient data selection in forms."
-version: 0.0.1
+version: 0.0.2
 
 homepage: https://github.com/BoyPhanna/flutter_grid_lookup.git
 repository: https://github.com/BoyPhanna/flutter_grid_lookup.git

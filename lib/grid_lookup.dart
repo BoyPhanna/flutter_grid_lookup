@@ -12,6 +12,7 @@ class GridLookup<T> extends StatefulWidget {
   final double? inputHeight;
   final double? buttonSize;
   final int? selectColumnIndex;
+  final InputDecoration? inputDecoration;
   final Function(String)? onSelectedMenu;
   final GridLookupDataSorce<T>? dataSource; // Use the generic data source
 
@@ -28,6 +29,7 @@ class GridLookup<T> extends StatefulWidget {
     this.onSelectedMenu,
     this.dataSource,
     this.textStyle,
+    this.inputDecoration,
   });
 
   @override
@@ -58,6 +60,14 @@ class _GridLookupState<T> extends State<GridLookup<T>> {
     final height = widget.inputHeight ?? 30;
     final buttonSize = widget.buttonSize ?? 30;
     final selectColumnIndex = widget.selectColumnIndex ?? 0;
+    final inputDecoration = widget.inputDecoration ??
+        InputDecoration(
+          contentPadding: EdgeInsets.symmetric(
+            vertical: (height - 20) / 2,
+            horizontal: 8.0,
+          ),
+          border: OutlineInputBorder(),
+        );
 
     return CompositedTransformTarget(
       link: _link,
@@ -115,15 +125,7 @@ class _GridLookupState<T> extends State<GridLookup<T>> {
                   },
                   style:
                       widget.textStyle ?? const TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: (height - 20) /
-                          2, // Adjust vertical padding based on height
-                      horizontal:
-                          8.0, // Horizontal padding for left and right space
-                    ),
-                    border: OutlineInputBorder(),
-                  ),
+                  decoration: inputDecoration,
                   controller: filterController,
                 ),
               ),
@@ -193,6 +195,7 @@ class GridLookupDataSorce<T> extends DataGridSource {
     filteredData = data;
   }
 
+  int index = 0;
   @override
   List<DataGridRow> get rows => filteredData.map<DataGridRow>((item) {
         return DataGridRow(
@@ -205,7 +208,10 @@ class GridLookupDataSorce<T> extends DataGridSource {
 
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
+    final color = index % 2 == 0 ? Colors.white : Colors.grey[200];
+    index++;
     return DataGridRowAdapter(
+      color: color,
       cells: row.getCells().map<Widget>((dataCell) {
         return Container(
           padding: EdgeInsets.all(8.0),
